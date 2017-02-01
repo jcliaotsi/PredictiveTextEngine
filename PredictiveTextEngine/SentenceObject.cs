@@ -13,6 +13,15 @@ namespace PredictiveTextEngine
         private int _maximumLength { get; set; }
         private Random _r;
         private List<WordObject> _wordList;
+        private bool _interrogative { get; set; }
+        public bool Interrogative
+        {
+            get
+            {
+                IsInterrogative();
+                return _interrogative;
+            }
+        }
 
         public string Sentence
         {
@@ -53,8 +62,7 @@ namespace PredictiveTextEngine
                 _sentence += (_wordList[i].Word + " ");
             }
 
-            // TODO: Determine appropriate ending punctuation.
-            _sentence += ".";
+            _sentence += EndingPunctuation();
         }
 
         public string ReturnSentence()
@@ -68,9 +76,8 @@ namespace PredictiveTextEngine
                     _sentence += (_wordList[i].Word + " ");
                 }
 
-                // TODO: Determine appropriate ending punctuation.
                 _sentence += _wordList[_wordList.Count - 1].Word;
-                _sentence += ".";
+                _sentence += EndingPunctuation();
             }
 
             else
@@ -79,6 +86,36 @@ namespace PredictiveTextEngine
             }
 
             return _sentence;
+        }
+
+        private void IsInterrogative()
+        {
+            // TODO: Improve algorithm
+            if (_wordList[0].Word.ToLower() == "what" || _wordList[0].Word.ToLower() == "where" || _wordList[0].Word.ToLower() == "when" ||
+                _wordList[0].Word.ToLower() == "why" || _wordList[0].Word.ToLower() == "is" || _wordList[0].Word.ToLower() == "do" ||
+                _wordList[0].Word.ToLower() == "how" || _wordList[0].Word.ToLower() == "isn't" || _wordList[0].Word.ToLower() == "isnt")
+            {
+                _interrogative = true;
+            }
+
+            else
+            {
+                _interrogative = false;
+            }
+        }
+
+        private string EndingPunctuation()
+        {
+            // TODO: Build support for exclamations
+            if (Interrogative)
+            {
+                return "?";
+            }
+
+            else
+            {
+                return ".";
+            }
         }
     }
 }

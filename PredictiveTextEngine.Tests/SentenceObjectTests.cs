@@ -24,5 +24,23 @@ namespace PredictiveTextEngine.Tests
 
             // Cleanup
         }
+
+        [TestMethod]
+        public void TestInterrogative()
+        {
+            // Arrange
+            SentenceObject sentence = new SentenceObject();
+            sentence.AddWord(new WordObject("What"));
+            sentence.AddWord(new WordObject("is"));
+            sentence.AddWord(new WordObject("this"));
+
+            // Act
+            string complete = sentence.ReturnSentence();
+
+            // Assert
+            Assert.AreEqual("What is this?", complete);
+
+            // Cleanup
+        }
     }
 }
