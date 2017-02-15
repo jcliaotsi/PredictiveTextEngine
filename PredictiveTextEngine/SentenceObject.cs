@@ -40,6 +40,14 @@ namespace PredictiveTextEngine
             _maximumLength = _r.Next(_minimumLength, 25);
         }
 
+        public SentenceObject(int minLength, int maxLength)
+        {
+            _sentence = string.Empty;
+            _wordList = new List<WordObject>();
+            _minimumLength = minLength;
+            _maximumLength = maxLength;
+        }
+
         public void AddWord(WordObject word)
         {
             _wordList.Add(word);

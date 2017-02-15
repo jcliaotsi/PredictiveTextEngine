@@ -43,13 +43,29 @@ namespace PredictiveTextEngine
             }
         }
 
-        public void AddLikelyWord(WordObject word, int rank)
+        public void AddLikelyWord(string word)
         {
-            _likely.Add(new RankedWord(word, rank));
+            bool found = false;
+
+            foreach(RankedWord w in _likely)
+            {
+                if (w.Word == word)
+                {
+                    w.Rank++;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                _likely.Add(new RankedWord(word, 1));
+            }
+
             SortRanks();
         }
 
-        public void ChangeRank(WordObject word, int rank)
+        public void ChangeRank(string word, int rank)
         {
             _likely.First(d => d.Word == word).Rank = rank;
         }
@@ -86,7 +102,7 @@ namespace PredictiveTextEngine
 
             foreach (RankedWord w in _likely)
             {
-                w.Probability = w.Rank / _total;
+                w.Probability = Convert.ToDecimal(w.Rank) / _total;
             }
         }
     }

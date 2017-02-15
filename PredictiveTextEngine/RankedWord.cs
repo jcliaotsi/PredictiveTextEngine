@@ -8,11 +8,11 @@ namespace PredictiveTextEngine
 {
     public class RankedWord
     {
-        private WordObject _word { get; set; }
+        private string _word { get; set; }
         private int _rank { get; set; }
         private decimal _probability { get; set; }
 
-        public WordObject Word
+        public string Word
         {
             get
             {
@@ -44,7 +44,7 @@ namespace PredictiveTextEngine
             }
         }
 
-        public RankedWord(WordObject word, int rank)
+        public RankedWord(string word, int rank)
         {
             _word = word;
             _rank = rank;
